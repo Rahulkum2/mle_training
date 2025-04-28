@@ -1,18 +1,33 @@
-# Median housing value prediction
+# California Housing Price Prediction - MLE Training Project
 
-The housing data can be downloaded from https://raw.githubusercontent.com/ageron/handson-ml/master/. The script has codes to download the data. We have modelled the median house value on given housing data. 
+## Project Description
+This repository contains a machine learning pipeline for predicting California housing prices using various regression techniques. The project demonstrates:
+- Data loading and preprocessing
+- Feature engineering
+- Model training (Linear Regression, Decision Trees, Random Forest)
+- Hyperparameter tuning (RandomizedSearchCV, GridSearchCV)
+- Model evaluation
 
-The following techniques have been used: 
+## Prerequisites
+- Python 3.8+
+- Conda/Miniconda
+- Git (optional)
 
- - Linear regression
- - Decision Tree
- - Random Forest
+## Setup Instructions
 
-## Steps performed
- - We prepare and clean the data. We check and impute for missing values.
- - Features are generated and the variables are checked for correlation.
- - Multiple sampling techinuqies are evaluated. The data set is split into train and test.
- - All the above said modelling techniques are tried and evaluated. The final metric used to evaluate is mean squared error.
+### 1. Clone the repository
+```bash
+git clone https://github.com/Rahulkum2/mle_training.git
+cd mle_training
 
-## To excute the script
-python < scriptname.py >
+2. Create and activate virtual environment
+
+# Windows
+python -m venv mle-env
+mle-env\Scripts\activate.bat
+
+#3. Install dependencies
+pip install -r requirements.txt
+#4. Run the pipeline
+python nonstandardcode.py
+
