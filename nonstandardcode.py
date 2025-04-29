@@ -42,7 +42,9 @@ def fetch_housing_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
 def load_housing_data(housing_path=HOUSING_PATH):
     csv_path = os.path.join(housing_path, "housing.csv")
     if not os.path.exists(csv_path):
-        raise FileNotFoundError(f"Could not find {csv_path}. Did the download fail?")
+        raise FileNotFoundError(
+            f"Could not find {csv_path}. Did the download fail?"
+        )
     return pd.read_csv(csv_path)
 
 
@@ -100,8 +102,12 @@ housing.plot(kind="scatter", x="longitude", y="latitude")
 housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.1)
 
 housing["rooms_per_household"] = housing["total_rooms"] / housing["households"]
-housing["bedrooms_per_room"] = housing["total_bedrooms"] / housing["total_rooms"]
-housing["population_per_household"] = housing["population"] / housing["households"]
+housing["bedrooms_per_room"] = (
+    housing["total_bedrooms"] / housing["total_rooms"]
+)
+housing["population_per_household"] = (
+    housing["population"] / housing["households"]
+)
 
 housing = strat_train_set.drop("median_house_value", axis=1)
 housing_labels = strat_train_set["median_house_value"].copy()
@@ -112,7 +118,9 @@ imputer.fit(housing_num)
 X = imputer.transform(housing_num)
 
 housing_tr = pd.DataFrame(X, columns=housing_num.columns, index=housing.index)
-housing_tr["rooms_per_household"] = housing_tr["total_rooms"] / housing_tr["households"]
+housing_tr["rooms_per_household"] = (
+    housing_tr["total_rooms"] / housing_tr["households"]
+)
 housing_tr["bedrooms_per_room"] = (
     housing_tr["total_bedrooms"] / housing_tr["total_rooms"]
 )
@@ -121,7 +129,9 @@ housing_tr["population_per_household"] = (
 )
 
 housing_cat = housing[["ocean_proximity"]]
-housing_prepared = housing_tr.join(pd.get_dummies(housing_cat, drop_first=True))
+housing_prepared = housing_tr.join(
+    pd.get_dummies(housing_cat, drop_first=True)
+)
 
 lin_reg = LinearRegression()
 lin_reg.fit(housing_prepared, housing_labels)
@@ -205,7 +215,9 @@ X_test_prepared["population_per_household"] = (
 )
 
 X_test_cat = X_test[["ocean_proximity"]]
-X_test_prepared = X_test_prepared.join(pd.get_dummies(X_test_cat, drop_first=True))
+X_test_prepared = X_test_prepared.join(
+    pd.get_dummies(X_test_cat, drop_first=True)
+)
 
 final_predictions = final_model.predict(X_test_prepared)
 final_mse = mean_squared_error(y_test, final_predictions)
